@@ -1,0 +1,780 @@
+
+Note: This script should run in Google Earth Engine (GEE)
+
+// ########################################################################################################################################
+
+var LC1992 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1992"),
+    LC1993 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1993"),
+    LC1994 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1994"),
+    LC1995 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1995"),
+    LC1996 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1996"),
+    LC1997 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1997"),
+    LC1998 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1998"),
+    LC1999 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_1999"),
+    LC2000 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2000"),
+    LC2001 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2001"),
+    LC2002 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2002"),
+    LC2003 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2003"),
+    LC2004 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2004"),
+    LC2005 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2005"),
+    LC2006 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2006"),
+    LC2007 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2007"),
+    LC2008 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2008"),
+    LC2009 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2009"),
+    LC2010 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2010"),
+    LC2011 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2011"),
+    LC2012 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2012"),
+    LC2013 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2013"),
+    LC2014 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2014"),
+    LC2015 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2015"),
+    LC2016 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2016"),
+    LC2017 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2017"),
+    LC2018 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2018"),
+    LC2019 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2019"),
+    LC2020 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2020"),
+    LC2021 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2021"),
+    LC2022 = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_2022"),
+    GLCFCS30D1 = ee.Image("projects/ee-xiigsrnr/assets/GLC_FCS30D_Annual_20002022_E0E5"),
+    GLCFCS30D2 = ee.Image("projects/ee-xiigsrnr/assets/GLC_FCS30D_Annual_20002022_E10E15"),
+    GLCFCS30D3 = ee.Image("users/GLC/GLC_FCS30D_Annual_20002022_E20E25"),
+    GLCFCS30D4 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_E30"),
+    GLCFCS30D5 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_E35"),
+    GLCFCS30D6 = ee.Image("projects/ee-xiigsrnr/assets/GLC_FCS30D_Annual_20002022_E40E45"),
+    GLCFCS30D7 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_E50_55"),
+    GLCFCS30D8 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_E60_65"),
+    GLCFCS30D9 = ee.Image("projects/ee-xiigsrnr/assets/GLC_FCS30D_Annual_20002022_E70E75"),
+    GLCFCS30D10 = ee.Image("projects/ee-xiigsrnr/assets/GLC_FCS30D_Annual_20002022_E80E85"),
+    GLCFCS30D11 = ee.Image("projects/ee-xiigsrnr/assets/GLC_FCS30D_Annual_20002022_E90E95"),
+    GLCFCS30D12 = ee.Image("users/GLC/GLC_FCS30D_Annual_20002022_E100E105"),
+    GLCFCS30D13 = ee.Image("users/GLC/GLC_FCS30D_Annual_20002022_E110E115"),
+    GLCFCS30D14 = ee.Image("users/GLC/GLC_FCS30D_Annual_20002022_E120E125"),
+    GLCFCS30D15 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_E130E135"),
+    GLCFCS30D16 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_E140E145"),
+    GLCFCS30D17_1 = ee.Image("projects/ee-qiang/assets/GLC_FCS30D/GLC_FCS30D_Annual_20002022_E150E155"),
+    GLCFCS30D17_2 = ee.Image("projects/ee-qiang/assets/GLC_FCS30D/GLC_FCS30D_Annual_20002022_E160E165"),
+    GLCFCS30D17_3 = ee.Image("projects/ee-qiang/assets/GLC_FCS30D/GLC_FCS30D_Annual_20002022_E170E175"),
+    GLCFCS30D18 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_W5W15"),
+    GLCFCS30D19 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W20W45"),
+    GLCFCS30D20 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W50W55"),
+    GLCFCS30D21 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W60"),
+    GLCFCS30D22 = ee.Image("projects/igsnnrdata/assets/GLC_FCS30D_Annual_20002022_W65W70"),
+    GLCFCS30D23 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W75W80"),
+    GLCFCS30D24 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W85W90"),
+    GLCFCS30D25 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W95W100"),
+    GLCFCS30D26 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W105"),
+    GLCFCS30D27 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W110W120"),
+    GLCFCS30D28 = ee.Image("projects/ee-glc/assets/GLC_FCS30D_Annual_20002022_W125W155"),
+    GLCFCS30D29 = ee.Image("projects/igsnnrdata-1/assets/GLC_FCS30D_Annual_20002022_W160W180"),
+    kaspian_seafix = 
+    /* color: #d63000 */
+    /* shown: false */
+    ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Polygon(
+                [[[50.18038630001961, 39.77872317044922],
+                  [50.18038630001961, 37.87891402335348],
+                  [52.11398005001961, 37.87891402335348],
+                  [52.11398005001961, 39.77872317044922]]], null, false),
+            {
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[49.6180574638418, 42.630888564946225],
+                  [49.6180574638418, 40.98504149687882],
+                  [51.5955965263418, 40.98504149687882],
+                  [51.5955965263418, 42.630888564946225]]], null, false),
+            {
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[48.7061922294668, 43.918631262542625],
+                  [48.7061922294668, 42.27422108236781],
+                  [50.3651277763418, 42.27422108236781],
+                  [50.3651277763418, 43.918631262542625]]], null, false),
+            {
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[47.97305592192894, 42.67203632356086],
+                  [47.97305592192894, 42.502174262916576],
+                  [48.449587904350814, 42.502174262916576],
+                  [48.449587904350814, 42.67203632356086]]], null, false),
+            {
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[48.12686451567894, 42.452543985758226],
+                  [48.12686451567894, 42.40084618145372],
+                  [48.194155775444564, 42.40084618145372],
+                  [48.194155775444564, 42.452543985758226]]], null, false),
+            {
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[50.71881499087915, 40.30021437711546],
+                  [50.71881499087915, 40.299167006755376],
+                  [50.72018828189478, 40.299167006755376],
+                  [50.72018828189478, 40.30021437711546]]], null, false),
+            {
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[50.7270547369729, 40.30021437711546],
+                  [50.7270547369729, 40.194347991600246],
+                  [50.92618193423853, 40.194347991600246],
+                  [50.92618193423853, 40.30021437711546]]], null, false),
+            {
+              "system:index": "6"
+            })]),
+    geometry = 
+    /* color: #d63000 */
+    /* shown: false */
+    /* displayProperties: [
+      {
+        "type": "rectangle"
+      }
+    ] */
+    ee.Geometry.Polygon(
+        [[[120.68412581724843, 28.334519165223988],
+          [120.68412581724843, 27.730859912272713],
+          [121.33231917662343, 27.730859912272713],
+          [121.33231917662343, 28.334519165223988]]], null, false);
+
+// ########################################################################################################################################
+// ############################################################## Parameters ##############################################################
+// ########################################################################################################################################
+
+var level = 1; // The level of AIV host bird habitat maps (1 or 2)
+var scale = 300; // The spatial resolution of AIV host bird habitat maps, recommended to be ≥ 300m.
+var year = 2022; // The year of AIV host bird habitat maps, with an optional range from 2000 to 2022.
+var output_path = 'AIV_Host_Bird_Habitats'; 
+var reduceToCCI = true; 
+var export_classes = false; // Export individual classes or composite layers
+var exportRegion = ee.Geometry.Rectangle([-180, -90, 180, 90], null, false); // Export region
+
+// ########################################################################################################################################
+// ####################################################### Load and preprocess data #######################################################
+// ########################################################################################################################################
+
+// CCILC
+var CCILC_Image = ee.Image("projects/ee-qiang/assets/ESACCI-LC/CCI-LC_300m_" + year);
+
+// GLCFCS30D
+var GLCFCS30D_IC = ee.ImageCollection([
+    GLCFCS30D1, GLCFCS30D2, GLCFCS30D3, GLCFCS30D4, GLCFCS30D5,
+    GLCFCS30D6, GLCFCS30D7, GLCFCS30D8, GLCFCS30D9, GLCFCS30D10,
+    GLCFCS30D11, GLCFCS30D12, GLCFCS30D13, GLCFCS30D14, GLCFCS30D15,
+    GLCFCS30D16, GLCFCS30D17_1, GLCFCS30D17_2, GLCFCS30D17_3, 
+    GLCFCS30D18, GLCFCS30D19, GLCFCS30D20, GLCFCS30D21, GLCFCS30D22,
+    GLCFCS30D23, GLCFCS30D24, GLCFCS30D25, GLCFCS30D26, GLCFCS30D27,
+    GLCFCS30D28, GLCFCS30D29
+]);
+var GLCFCS30D_IC_Image = GLCFCS30D_IC.mosaic();
+var years = ee.List.sequence(2000, 2022);
+var bandNames = years.map(function(year) {return ee.String('GLCFCS30D_').cat(ee.Number(year).toInt().format());});
+var GLCFCS30D_IC_Image_Rename = GLCFCS30D_IC_Image.rename(bandNames);
+var GLCFCS30D_IC_Image = GLCFCS30D_IC_Image_Rename.select('GLCFCS30D_' + year);
+var defaultProjection = ee.Image(GLCFCS30D1).projection();
+
+// ======================= Preprocess other data =================================
+
+// Export Function 
+var createOutput = function(image, output_path, name, scale) {
+  Export.image.toDrive({
+    image: image,
+    description: name,
+    folder: output_path,
+    scale: scale,
+    region: exportRegion,
+    fileFormat: 'GeoTIFF',
+    maxPixels: 1e12,
+    formatOptions: {
+      cloudOptimized: false
+    }
+  });
+};
+
+// Resampling Function 
+var resampleToCCILC = function(image) {
+  return image
+    .resample('bilinear')
+    .reproject({
+      crs: CCILC_Image.projection().crs(),
+      scale: CCILC_Image.projection().nominalScale()
+    });
+};
+
+// Wetland
+var liu_wetland = GLCFCS30D_IC_Image.gte(181).and(GLCFCS30D_IC_Image.lte(187)).selfMask();
+var liu_swamp = GLCFCS30D_IC_Image.eq(181).selfMask();
+var liu_mangroves = GLCFCS30D_IC_Image.eq(185).selfMask();
+var liu_tidalflat = GLCFCS30D_IC_Image.eq(187).selfMask();
+
+function resampleWetland(wetlandImage) {
+  return wetlandImage.setDefaultProjection(defaultProjection)
+      .reduceResolution({
+        reducer: ee.Reducer.mean().unweighted(),
+        maxPixels: 110
+      }).reproject({crs: CCILC_Image.projection()}).gte(0.5);
+}
+
+var liu_wetland_res = resampleWetland(liu_wetland);
+var liu_swamp_res = resampleWetland(liu_swamp);
+var liu_mangroves_res = resampleWetland(liu_mangroves);
+var liu_tidalflat_res = resampleWetland(liu_tidalflat);
+
+// Kaspian
+var kaspian_seafix_image = ee.Image().byte().paint({featureCollection: kaspian_seafix,color: 1});
+
+// Elevation 
+var srtm = ee.Image("CGIAR/SRTM90_V4");
+var elevation = srtm.select('elevation'); 
+if (reduceToCCI) {elevation = resampleToCCILC(elevation);}
+var elev_products = ee.Terrain.products(elevation); // Generates slope, aspect, hillshade
+if (reduceToCCI) {elev_products = resampleToCCILC(elev_products);}
+
+// Mountain Mask
+var k1 = ee.Image("users/Uploads/k1classes");
+var mountains = k1.rename('mountains');
+if (reduceToCCI) {mountains = resampleToCCILC(mountains);}
+
+// Koeppen Climate
+var koeppen = ee.Image("users/Uploads/beck_koeppenpresent_1km_expanded5km");
+koeppen = koeppen.rename('koeppen');
+if (reduceToCCI) {koeppen = resampleToCCILC(koeppen);}
+
+// Mangroves Mask 
+var liu_mangroves_buffered = liu_mangroves_res
+  .convolve(ee.Kernel.euclidean({ radius: 600, units: 'meters' }))
+  .expression('b(0) > 0');
+
+// Biomes and Realms
+var biomes = ee.Image("users/Uploads/biomes_1km_expanded5km");
+biomes = biomes.rename('biomes');
+// Tropical & Subtropical Mask
+var subtropics = biomes
+  .addBands(ee.Image.pixelLonLat().select('latitude')
+  .expression("b(0) >= -23.5 && b(0) <= 23.5"))
+  .expression('b(0) >= 1 && b(0) <= 3 || b(0) == 7 || b(1) == 1')
+  .selfMask();
+var alpineBiomes = ee.Image('users/Uploads/naturemap_otherdata/AlpineShapes');
+var biomecog = ee.FeatureCollection("RESOLVE/ECOREGIONS/2017");
+
+// Urban and Rural Boundary Mask
+var LandCover = CCILC_Image; // Load CCILC Image
+var urban = LandCover.expression("b(0) == 190");
+if (reduceToCCI) {urban = resampleToCCILC(urban);}
+var urban_boundary_ring = urban.convolve(ee.Kernel.euclidean({ radius: 600, units: 'meters' })).expression('b(0) > 0');
+var urban_boundary = urban_boundary_ring.subtract(urban).selfMask();
+
+// ########################################################################################################################################
+// ########################################################### 8 Deserts ##################################################################
+// ########################################################################################################################################
+
+// Level 1 ==========================================================================
+var iucn_desert_level1 = LandCover.expression(
+  'b(0) == 150 || b(0) == 151 || b(0) == 152 || b(0) == 153 || b(0) == 200 || b(0) == 201 || b(0) == 202'
+).rename('desert');
+
+iucn_desert_level1 = iucn_desert_level1.addBands(koeppen);
+
+iucn_desert_level1 = iucn_desert_level1.expression(
+  '(desert == 1 && ((koeppen >= 4 && koeppen <= 7) || koeppen >= 29)) ? 800 : 0', {
+    'desert': iucn_desert_level1.select('desert'),
+    'koeppen': iucn_desert_level1.select('koeppen')
+}).rename('comp');
+
+iucn_desert_level1 = iucn_desert_level1.selfMask();
+
+// Level 2 ==========================================================================
+var iucn_desert_level2 = iucn_desert_level1.rename('desert');
+iucn_desert_level2 = iucn_desert_level2.addBands(koeppen);
+
+iucn_desert_level2 = iucn_desert_level2.expression(
+  '(desert == 800 && koeppen == 4) ? 801 : ' +  
+  '(desert == 800 && (koeppen >= 5 && koeppen <= 6)) ? 802 : ' + 
+  '(desert == 800 && (koeppen == 7 || koeppen >= 29)) ? 803 : ' + 
+  '(desert == 800) ? 800 : 0', {
+    'desert': iucn_desert_level2.select('desert'),
+    'koeppen': iucn_desert_level2.select('koeppen')
+}).rename('comp');
+
+iucn_desert_level2 = iucn_desert_level2.selfMask();
+
+// ########################################################################################################################################
+// ######################################################## 14 Artifical terrestrial ######################################################
+// ########################################################################################################################################
+
+var iucn_artificial_terrestrial = LandCover.rename('artificial_terrestrial'); 
+iucn_artificial_terrestrial = iucn_artificial_terrestrial.addBands(subtropics.unmask().add(1).rename('subtropics'))
+  .addBands(urban_boundary.rename("urbanboundary"))
+  .addBands(mountains.selfMask())
+  .addBands(iucn_desert_level1.rename("desert"));
+
+var iucn_artificial_terrestrial = iucn_artificial_terrestrial.expression(
+    "((subtropics == 2 && (LandCover == 10 || LandCover == 11 || LandCover == 20 || LandCover == 30 || LandCover == 40 || LandCover == 100 || LandCover == 210) && urbanboundary == 1) ) ? 1404" + // 14.4 
+    ": (LandCover == 10 || LandCover == 11 || LandCover == 20 || LandCover == 30 || LandCover == 40 || LandCover == 100) ? 14012" + // 14.1 & 2 
+    ": (LandCover == 12) ? 14036" + // 14.3 & 6 
+    ": (LandCover == 190) ? 1405" + // 14.5 
+    ": (LandCover == 190 || LandCover == 10 || LandCover == 11 || LandCover == 12 || LandCover == 20 || LandCover == 30 || LandCover == 40) ? 1400" + 
+    ": 0 ",{ 
+      'LandCover': iucn_artificial_terrestrial.select('artificial_terrestrial'),
+      'urbanboundary': iucn_artificial_terrestrial.select('urbanboundary'),
+      'mountains': iucn_artificial_terrestrial.select('mountains').expression('b(0) >= 1'),
+      'subtropics': iucn_artificial_terrestrial.select('subtropics')
+}).rename('comp');
+
+iucn_artificial_terrestrial = iucn_artificial_terrestrial.unmask();
+
+// ########################################################################################################################################
+// ############################################### 15 Artifical aquatic ###################################################################
+// ########################################################################################################################################
+
+var iucn_artificial_aquatic = LandCover.rename('artificial_aquatic'); 
+iucn_artificial_aquatic = iucn_artificial_aquatic.addBands(subtropics.unmask().add(1).rename('subtropics'));
+
+var iucn_artificial_aquatic = iucn_artificial_aquatic.expression(
+    "(LandCover == 160 || LandCover == 170 || LandCover == 180) ? 1500" + // 
+    ": 0 ",{ 
+      'LandCover': iucn_artificial_aquatic.select('artificial_aquatic'),
+      'subtropics': iucn_artificial_aquatic.select('subtropics')
+}).rename('comp');
+
+iucn_artificial_aquatic = iucn_artificial_aquatic.unmask().updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)'));
+
+
+// ########################################################################################################################################
+// ######################################################## 1 Forest ######################################################################
+// ########################################################################################################################################
+
+// Level 1 ==========================================================================
+var iucn_forest_level1 = LandCover.expression('((b(0) >= 40 && b(0) <= 82) || b(0) == 90) ').rename('forest');
+
+iucn_forest_level1 = iucn_forest_level1
+  .addBands(koeppen)
+  .addBands(liu_mangroves_res.unmask().rename('mangroves'))
+  .addBands(LandCover.rename('LandCover'));
+
+iucn_forest_level1 = iucn_forest_level1.expression(
+  "((LandCover >= 40 && LandCover <= 82) || LandCover == 90) ? 100 : 0", {
+    'forest': iucn_forest_level1.select('forest'),
+    'LandCover': iucn_forest_level1.select('LandCover'),
+    'mangroves': iucn_forest_level1.select('mangroves'),
+    'koeppen': iucn_forest_level1.select('koeppen')
+    })
+    .rename('comp');
+
+iucn_forest_level1 = iucn_forest_level1
+  .selfMask()
+  .updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)'))
+  .updateMask(iucn_artificial_aquatic.expression('(b(0) == 0)')); 
+
+// Level 2 ==========================================================================
+var iucn_forest_level2 = iucn_forest_level1.rename('forest')
+  .addBands(koeppen)
+  .addBands(LandCover.rename('LandCover'))
+  .addBands(biomes)
+  .addBands(subtropics.unmask().add(1).rename('subtropics'))
+  .addBands(mountains)
+  .addBands(ee.Image.pixelLonLat()) // Adding Latitude and Longitude
+  .addBands(liu_mangroves_res.unmask().rename('mangroves'))
+  .addBands(liu_swamp_res.rename('swamp'))
+  .addBands(elev_products.select('elevation'));
+
+var iucn_forest_level2 = iucn_forest_level2.expression(
+    "((forest == 100 && mountains == 1 && subtropics == 2) && ((koeppen >=1 && koeppen < 3) || ((koeppen == 12 || koeppen == 15) && elevation >= 1200 ) || ((koeppen >= 8 && koeppen <= 9) && biome == 3)) || ((biome == 10 || biome ==1) && (koeppen >= 9 && koeppen <= 10)  ) || ( (biome == 1 && koeppen >=22) || (biome == 10 && koeppen >=29)) ) ? 109" + // 1.9
+    ": ((forest == 100 && mangroves == 1 ) ) ? 107" + // 1.7
+    ": ( mangroves == 1 && (LandCover == 20 || LandCover == 30 || LandCover == 62 || LandCover == 72) ) ? 107" + // 1.7
+    ": (forest == 100 && swamp == 1) ? 108" + // 1.8
+    ": (forest == 100 && ((koeppen >= 1 && koeppen <= 2) || (koeppen == 11) || ( subtropics == 2 && (koeppen >= 12 && koeppen <= 15 )) || (subtropics == 2 && ((koeppen >= 8 && koeppen <= 9) && biome == 3)) ) ) ? 106" + // 1.6
+    ": ((forest == 100 && subtropics == 1) && ((koeppen >= 8 && koeppen <= 10) || ( koeppen >= 12 && koeppen <= 16) || (koeppen >= 17 && koeppen <= 18) || (koeppen >= 21 && koeppen <= 26) || ( biome >= 4 && biome <= 5) || (biome == 8 && koeppen == 7)  ) ) ? 104" + // 1.4
+    ": (forest == 100 && ((subtropics == 2 && (koeppen >= 3 && koeppen <= 7)) || (biome >= 12 && biome <= 13) || (biome == 2) ||  (biome == 8 && (koeppen == 6 || koeppen == 4) ) ) ) ? 105" + // 1.5
+    ": (forest == 100 && (biome == 11 && koeppen == 30 )) ? 102" + // 1.2
+    ": (forest == 100 && (latitude > 45 && ((koeppen >= 27 && koeppen <= 29) || (koeppen >= 19 && koeppen <= 20) || (koeppen >= 23 && koeppen <= 24) || (biome == 6 && koeppen == 7) )) ) ? 101" + // 1.1
+    ": (forest == 100 && ((latitude < 0 && subtropics == 1) && (koeppen == 16 || (koeppen >= 29 && koeppen <= 30 )) ) ) ? 103" + // 1.3
+    ": (forest == 100) ? 100" + // 
+    ": 0",{
+      'forest': iucn_forest_level2.select('forest'),
+      'LandCover': iucn_forest_level2.select('LandCover'),
+      'biome' : iucn_forest_level2.select('biomes'),
+      'koeppen': iucn_forest_level2.select('koeppen'),
+      'mangroves': iucn_forest_level2.select('mangroves'),
+      'mountains': iucn_forest_level2.select('mountains').expression('b(0) >= 1'),
+      'elevation': iucn_forest_level2.select('elevation'),
+      'swamp' : iucn_forest_level2.select('swamp'),
+      'subtropics' : iucn_forest_level2.select('subtropics'),
+      'latitude': iucn_forest_level2.select('latitude')
+      })
+      .rename('comp');  
+
+iucn_forest_level2 = iucn_forest_level2.selfMask();
+
+// ########################################################################################################################################
+// ####################################################### 2 Savanna ######################################################################
+// ########################################################################################################################################
+
+// Level 1 ==========================================================================
+var iucn_savanna_level1 = LandCover.expression('b(0) == 110 || b(0) == 120 || b(0) == 121 || b(0) == 122').rename('savanna');
+
+iucn_savanna_level1 = iucn_savanna_level1
+  .addBands(koeppen)
+  .addBands(subtropics.unmask().add(1).rename("subtropics"))
+  .addBands(LandCover.rename('LandCover'))
+  .addBands(biomes);
+
+var iucn_savanna_level1 = iucn_savanna_level1.expression(
+    "((savanna == 1 && koeppen == 3)) ? 200" + 
+    ": (savanna == 1 && ((subtropics == 2 && (koeppen == 6 || koeppen == 11 || koeppen == 14)))) ? 200" + //
+    ": (savanna == 1 && koeppen == 6) ? 200" + 
+    ": (   (LandCover == 20 || LandCover == 80 || LandCover == 81 || LandCover == 82 || LandCover == 160 || LandCover == 170 || LandCover == 180) && biome == 9) ? 200 " +
+    ": 0",{ 
+      'savanna': iucn_savanna_level1.select('savanna'),
+      'LandCover': iucn_savanna_level1.select('LandCover'),
+      'biome': iucn_savanna_level1.select('biomes'),
+      'subtropics' : iucn_savanna_level1.select('subtropics'),
+      'latitude': iucn_savanna_level1.select('latitude'),
+      'koeppen': iucn_savanna_level1.select('koeppen')
+      })
+      .rename('comp');
+
+iucn_savanna_level1 = iucn_savanna_level1.selfMask();
+iucn_savanna_level1 = iucn_savanna_level1.updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)')).updateMask(iucn_artificial_aquatic.expression('(b(0) == 0)'));
+
+// Level 2 ==========================================================================
+var iucn_savanna_level2 = iucn_savanna_level1.rename('savanna');
+iucn_savanna_level2 = iucn_savanna_level2
+.addBands(koeppen)
+.addBands(LandCover.rename('LandCover'))
+.addBands(biomes);
+
+iucn_savanna_level2 = iucn_savanna_level2.expression(
+    "((savanna == 200 && (LandCover == 20 || LandCover == 80 || LandCover == 81 || LandCover == 82 || LandCover == 160 || LandCover == 170 || LandCover == 180)) && biome == 9) ? 202" + // 2.2
+    ": (savanna == 200 && ((koeppen == 3 || koeppen == 4 || koeppen == 6) )   ) ? 201" + // 2.1
+    ": (savanna == 200 && ((koeppen == 11 || koeppen == 14) || ((koeppen == 3 || koeppen == 6) && biome == 9 ) ) ) ? 202" + // 2.2
+    ": savanna == 200 ? 200" + 
+    ": 0",{ 
+      'savanna': iucn_savanna_level2.select('savanna'),
+      'LandCover': iucn_savanna_level2.select('LandCover'),
+      'biome' : iucn_savanna_level2.select('biomes'),
+      'koeppen': iucn_savanna_level2.select('koeppen')
+      }).rename('comp');
+
+iucn_savanna_level2 = iucn_savanna_level2.selfMask();
+
+// ########################################################################################################################################
+// ################################################### 3 Shrubland ########################################################################
+// ########################################################################################################################################
+
+// Level 1 ==========================================================================
+var iucn_shrubland_level1 = LandCover.expression(
+  'b(0) == 10 || b(0) == 30 || b(0) == 40 || b(0) == 100 || b(0) == 120 || ' +
+  'b(0) == 121 || b(0) == 122 || b(0) == 150 || b(0) == 151 || b(0) == 152 || ' +
+  'b(0) == 153 || b(0) == 200 || b(0) == 201 || b(0) == 202'
+).rename('shrubland');
+
+iucn_shrubland_level1 = iucn_shrubland_level1
+  .addBands(koeppen.rename('koeppen'))
+  .addBands(iucn_artificial_terrestrial.rename('artificial_terrestrial'))
+  .addBands(iucn_savanna_level1.rename('savanna'))
+  .addBands(iucn_desert_level1.rename('desert'));
+
+iucn_shrubland_level1 = iucn_shrubland_level1.expression(
+  "(shrubland == 1 && savanna == 0 && desert == 0) ? 300" + // 
+  ": 0",{ 
+    'savanna' : iucn_shrubland_level1.select('savanna').unmask().expression("b(0) > 0"), 
+    'desert' : iucn_shrubland_level1.select('desert').unmask().expression("b(0) > 0"), 
+    'shrubland': iucn_shrubland_level1.select('shrubland'),
+    'koeppen': iucn_shrubland_level1.select('koeppen')
+}).rename('comp');
+
+iucn_shrubland_level1 = iucn_shrubland_level1
+  .selfMask()
+  .updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)'))
+  .updateMask(iucn_artificial_aquatic.expression('(b(0) == 0)'));
+
+// Level 2 ==========================================================================
+var iucn_shrubland_level2 = iucn_shrubland_level1.rename('shrubland')
+  .addBands(koeppen.rename('koeppen'))
+  .addBands(mountains)
+  .addBands(ee.Image.pixelLonLat())
+  .addBands(biomes)
+  .addBands(alpineBiomes.rename('alpine_abovetreelines'))
+  .addBands(subtropics.unmask().add(1).rename('subtropics'))
+  .addBands(elev_products.select('elevation'));
+
+var iucn_shrubland_level2 = iucn_shrubland_level2.expression(
+    "( ((shrubland == 300 && mountains == 1 && subtropics == 2) || (shrubland == 300 && alpine_abovetreelines == 1 && subtropics == 2)) && ((koeppen >=1 && koeppen < 3) || ((koeppen >= 9 && koeppen <= 12 || (koeppen == 15 || koeppen >= 29 ) || (biome == 10) || (biome == 1 && koeppen >=22) ) && elevation >= 1200 )) ) ? 307" + // 3.7
+    ": (shrubland == 300 && ((koeppen >=8 && koeppen <= 10) && (subtropics == 1 && biome == 12)) ) ? 308" + // 3.8
+    ": (shrubland == 300 && (biome == 11 && koeppen == 30)) ? 301" + // 3.1
+    ": (shrubland == 300 && (latitude > 45 && ((koeppen >= 27 && koeppen <= 29) || (koeppen >= 19 && koeppen <= 20) || (koeppen >= 23 && koeppen <= 24) || (biome == 6 && koeppen == 7) )) ) ? 303" + // 3.3
+    ": (shrubland == 300 && ((latitude < 0 && subtropics == 1) && (koeppen == 16 || (koeppen >= 29 && koeppen <= 30 )) ) ) ? 302" + // 3.2
+    ": (shrubland == 300 && ((koeppen >= 3 && koeppen <= 7) || (koeppen == 7 && subtropics == 2 ) || (biome >= 2 && biome <= 3) || ( biome == 7 ) )  ) ? 305" + // 3.5
+    ": ((shrubland == 300 && subtropics == 1) && ((koeppen >=8 && koeppen <= 10) || (koeppen >= 12 && koeppen <= 19) || (koeppen >= 21 && koeppen <= 26) || (((biome >= 4 && biome <= 5) || biome == 8 || biome == 10 ) && koeppen >= 27) )) ? 304" + // 3.4
+    ": (shrubland == 300 && ((koeppen == 1 || koeppen == 2) || (koeppen >= 11 && koeppen <= 12) || ((koeppen >= 14 && koeppen <= 15) && subtropics == 2) ) ) ? 306" + // 3.6
+    ": shrubland == 300 ? 300" +  
+    ": 0",{ 
+      'shrubland': iucn_shrubland_level2.select('shrubland'),
+      'biome' : iucn_shrubland_level2.select('biomes'),
+      'koeppen': iucn_shrubland_level2.select('koeppen'),
+      'alpine_abovetreelines' : iucn_shrubland_level2.select('alpine_abovetreelines').unmask(),
+      'mountains': iucn_shrubland_level2.select('mountains').expression('b(0) >= 1'),
+      'elevation': iucn_shrubland_level2.select('elevation'),
+      'subtropics': iucn_shrubland_level2.select('subtropics'),
+      'latitude': iucn_shrubland_level2.select('latitude')
+      })
+      .rename('comp');
+
+iucn_shrubland_level2 = iucn_shrubland_level2.selfMask();
+
+// ########################################################################################################################################
+// ######################################################### 4 Grassland ##################################################################
+// ########################################################################################################################################
+
+// Level 1 ==========================================================================
+var iucn_grassland_level1 = LandCover.expression(
+  'b(0) == 10 || b(0) == 11 || b(0) == 30 || b(0) == 40 || b(0) == 110 || ' +
+  'b(0) == 130 || b(0) == 140 || b(0) == 150 || b(0) == 151 || b(0) == 152 || ' +
+  'b(0) == 153 || b(0) == 200 || b(0) == 201 || b(0) == 202'
+).rename('grassland');
+
+iucn_grassland_level1 = iucn_grassland_level1
+  .addBands(iucn_desert_level1.rename("desert"))
+  .addBands(iucn_savanna_level1.rename('savanna'))
+  .addBands(iucn_shrubland_level1.rename('shrubland'))
+  .addBands(LandCover.rename('LandCover'))
+  .addBands(iucn_artificial_terrestrial.rename('artificial_terrestrial'))
+  .addBands(koeppen.rename('koeppen'));
+
+var iucn_grassland_level1 = iucn_grassland_level1.expression(
+    "(grassland == 1 && desert == 0 && savanna == 0 && shrubland == 0) ? 400" + 
+    ": 0",{ 
+      'grassland': iucn_grassland_level1.select('grassland'),
+      'koeppen': iucn_grassland_level1.select('koeppen'),
+      'desert': iucn_grassland_level1.unmask().select('desert'),
+      'savanna': iucn_grassland_level1.unmask().select('savanna'),
+      'shrubland': iucn_grassland_level1.unmask().select('shrubland'),
+      'LandCover': iucn_grassland_level1.select('LandCover'),
+}).rename('comp');
+
+iucn_grassland_level1 = iucn_grassland_level1
+  .selfMask()
+  .updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)'))
+  .updateMask(iucn_artificial_aquatic.expression('(b(0) == 0)'));
+
+// Level 2 ==========================================================================
+var iucn_grassland_level2 = iucn_grassland_level1.rename('grassland')
+  .addBands(koeppen.rename('koeppen'))
+  .addBands(mountains)
+  .addBands(ee.Image.pixelLonLat())
+  .addBands(LandCover.rename('LandCover'))
+  .addBands(biomes)
+  .addBands(alpineBiomes.rename('alpine_abovetreelines'))
+  .addBands(subtropics.unmask().add(1).rename('subtropics'))
+  .addBands(elev_products.select('elevation'));
+
+var iucn_grassland_level2 = iucn_grassland_level2.expression(
+    "((grassland == 400 && (alpine_abovetreelines == 1 || mountains == 1)) && ((koeppen >= 1 && koeppen < 3) || ((koeppen == 11 || koeppen == 12 || koeppen == 15 || (koeppen >= 29 && subtropics == 2) || biome == 10 ) && elevation >= 1200 )) )? 407" + // 4.7
+    ": ((grassland == 400 || LandCover == 140) && (biome == 11 && (koeppen == 30 || (koeppen == 7 && latitude > 60) ) ) ) ? 402" + // 4.2
+    ": (grassland == 400 && ( (koeppen >= 19 && koeppen <= 20) || (koeppen >= 23 && koeppen <= 24) || ((koeppen >= 27 && koeppen <= 30) && (biome == 6 || biome == 11 || (biome == 13 && subtropics == 1)) || (biome == 6 && koeppen == 7) ) ) ) ? 401" + // 4.1
+    ": (grassland == 400 && ((latitude < 0 && subtropics == 1) && (koeppen == 16 || (koeppen >= 29 && koeppen <= 30 )) ) ) ? 403" + // 4.3
+    ": (grassland == 400 && (koeppen >= 3 && koeppen <= 5) || ( biome == 7 ) ) ? 405" + // 4.5
+    ": ((grassland == 400 && subtropics == 1) && ((koeppen >=7 && koeppen <= 10) || (koeppen >= 12 && koeppen <= 16) || (koeppen >= 17 && koeppen <= 18) || (koeppen >= 21 && koeppen <= 26) || ((koeppen >= 27 && (biome >= 4 && biome <= 5) || biome == 8 || biome == 10)) ) ) ? 404" + // 4.4
+    ": (grassland == 400 && ((koeppen >= 1 && koeppen <= 2) || (koeppen >= 11 && koeppen <= 12) || ((koeppen >= 14 && koeppen <= 15) && subtropics == 2) ) ) ? 406" + // 4.6
+    ": grassland == 400 ? 400" + 
+    ": 0",{ 
+      'grassland': iucn_grassland_level2.select('grassland'),
+      'biome' : iucn_grassland_level2.select('biomes'),
+      'LandCover' : iucn_grassland_level2.select('LandCover'),
+      'koeppen': iucn_grassland_level2.select('koeppen'),
+      'alpine_abovetreelines' : iucn_grassland_level2.select('alpine_abovetreelines').unmask(),
+      'mountains': iucn_grassland_level2.select('mountains').expression('b(0) >= 1'),
+      'elevation': iucn_grassland_level2.select('elevation'),
+      'subtropics': iucn_grassland_level2.select('subtropics'),      
+      'latitude': iucn_grassland_level2.select('latitude')
+}).rename('comp');
+
+iucn_grassland_level2 = iucn_grassland_level2.selfMask();
+
+
+// ########################################################################################################################################
+// ######################################################### 5 Wetlands ###################################################################
+// ########################################################################################################################################
+
+// Level 1 ==========================================================================
+var iucn_wetlands_level1 = LandCover.expression(
+  'b(0) == 100 || b(0) == 160 || b(0) == 170 || b(0) == 180 || b(0) == 210'
+).rename('wetlands');
+
+iucn_wetlands_level1 = iucn_wetlands_level1
+  .addBands(iucn_artificial_terrestrial.rename('artificial_terrestrial'));
+
+iucn_wetlands_level1 = iucn_wetlands_level1.expression(
+    "(wetlands == 1) ? 500" + 
+    ": 0 ",{ 
+      'wetlands': iucn_wetlands_level1.select('wetlands')
+      })
+      .rename('comp');
+
+iucn_wetlands_level1 = iucn_wetlands_level1
+  .selfMask()
+  .updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)'));
+
+var marine_seabedzones = ee.Image('users/Uploads/naturemap_otherdata/marine/HarrisEtAl_SeafloorGeomorphic_rasterized')
+  .unmask(0);
+var marine_seabedzones2 = marine_seabedzones.eq(0).selfMask();
+iucn_wetlands_level1 = iucn_wetlands_level1.updateMask(marine_seabedzones2);
+
+iucn_wetlands_level1 = iucn_wetlands_level1
+  .addBands(liu_wetland_res.rename('liu_wetland_res'));
+
+var iucn_wetlands_level1 = iucn_wetlands_level1.expression(
+    "(comp == 500) ? 500" + 
+    ": (liu_wetland_res == 1) ? 500" + 
+    ": 0",{
+      'comp': iucn_wetlands_level1.select('comp'),
+      'liu_wetland_res': iucn_wetlands_level1.select('liu_wetland_res')
+      })
+      .rename('comp');
+
+iucn_wetlands_level1 = iucn_wetlands_level1
+  .selfMask()
+  .updateMask(iucn_artificial_terrestrial.expression('(b(0) == 0)'))
+  .updateMask(iucn_artificial_aquatic.expression('(b(0) == 0)'));
+
+// Level 2 ==========================================================================
+var iucn_wetlands_level2 = iucn_wetlands_level1.rename('wetlands')
+  .addBands(koeppen.rename('koeppen'))
+  .addBands(LandCover.rename('LandCover'))
+  .addBands(liu_tidalflat_res.rename('intertidal'))
+  .addBands(mountains.rename('mountains'));
+
+var iucn_wetlands_level2 = iucn_wetlands_level2.expression(
+    "(wetlands == 500 && ((koeppen >= 27 && koeppen <= 28) || (koeppen >= 19 && koeppen <= 20) || (koeppen >= 23 && koeppen <=24)) ) ? 510" + // 5.10
+    ": wetlands == 500 ? 500" + 
+    ": 0 ",{ 
+      'LandCover': iucn_wetlands_level2.select('LandCover'),
+      'wetlands': iucn_wetlands_level2.select('wetlands'),
+      'intertidal': iucn_wetlands_level2.select('intertidal').unmask(),
+      'mountains': iucn_wetlands_level2.select('mountains'),
+      'koeppen': iucn_wetlands_level2.select('koeppen')
+      })
+      .rename('comp');
+
+iucn_wetlands_level2 = iucn_wetlands_level2.selfMask();
+
+// ########################################################################################################################################
+// ######################################################### Composite ####################################################################
+// ########################################################################################################################################
+
+if (level === 1) {
+  // Artificial Land & Aquatic Artificial Land
+  var artificial_terrestrial_level1 = iucn_artificial_terrestrial.expression('b(0) >= 1400 && b(0) <= 14036')
+    .multiply(1400)
+    .toInt16()
+    .selfMask();
+    
+  var artificial_aquatic_level1 = iucn_artificial_aquatic.expression('b(0) == 1500')
+    .multiply(1500)
+    .toInt16()
+    .selfMask();
+
+  // Level 1 Composite List
+  var ll = [
+    iucn_forest_level1.toInt16(),
+    iucn_savanna_level1.toInt16(),
+    iucn_shrubland_level1.toInt16(),
+    iucn_grassland_level1.toInt16(),
+    iucn_desert_level1.toInt16(),
+    iucn_wetlands_level1.toInt16(),
+    artificial_aquatic_level1,
+    artificial_terrestrial_level1
+  ];
+} else {
+  // Level 2 Composite List
+  var ll = [
+    iucn_forest_level2.toInt16(),
+    iucn_savanna_level2.toInt16(),
+    iucn_shrubland_level2.toInt16(),
+    iucn_grassland_level2.toInt16(),
+    iucn_desert_level2.toInt16(),
+    iucn_wetlands_level2.toInt16(),
+    iucn_artificial_aquatic.selfMask().toInt16(),
+    iucn_artificial_terrestrial.selfMask().toInt16()
+  ];
+}
+
+// Composite Image Collection
+var comp = ee.ImageCollection(ll);
+
+// Missing and Duplicate Classes Check
+var missing = comp.reduce(ee.Reducer.anyNonZero()).where(0, 1);
+var duplicates = comp.reduce(ee.Reducer.countDistinct());
+
+// Composite to First Non-Null Class
+comp = comp.reduce(ee.Reducer.firstNonNull()).selfMask();
+
+// Caspian sea fix
+comp = comp.where(kaspian_seafix_image, ee.Image(500));
+
+// Classes that only got mapped to level 1 at level 2
+if(level == 2){
+  var level1_only = comp.expression('(b(0) == 100) || (b(0) == 200) || (b(0) == 300) || (b(0) == 400) || (b(0) == 500) || (b(0) == 800) || (b(0) == 1400) || (b(0) == 1500)');
+  Map.addLayer(level1_only.selfMask().randomVisualizer(), {}, 'Level 2 only at level 1', 0);
+}
+
+// ########################################################################################################################################
+// ############################################################ Export ####################################################################
+// ########################################################################################################################################
+
+function exportClassLayers(level, export_classes) {
+  if (!export_classes) return;
+
+  // Define Classes by Level
+  var classes = (level === 1) ? {
+    desert: iucn_desert_level1,
+    artificial_terrestrial: iucn_artificial_terrestrial.selfMask().expression('(b(0) > 0)').where(1, 1400),
+    artificial_aquatic: iucn_artificial_aquatic,
+    forest: iucn_forest_level1,
+    savanna: iucn_savanna_level1,
+    shrubland: iucn_shrubland_level1,
+    grassland: iucn_grassland_level1,
+    wetlands: iucn_wetlands_level1
+  } : {
+    desert: iucn_desert_level2,
+    artificial_terrestrial: iucn_artificial_terrestrial,
+    artificial_aquatic: iucn_artificial_aquatic,
+    forest: iucn_forest_level2,
+    savanna: iucn_savanna_level2,
+    shrubland: iucn_shrubland_level2,
+    grassland: iucn_grassland_level2,
+    wetlands: iucn_wetlands_level2
+  };
+
+  // Define Output Filenames
+  var filenames = {
+    desert: 'iucn_8_deserts_level',
+    artificial_terrestrial: 'iucn_14_artificial_terrestrial_level',
+    artificial_aquatic: 'iucn_15_artificial_aquatic_level',
+    forest: 'iucn_1_forests_level',
+    savanna: 'iucn_2_savanna_level',
+    shrubland: 'iucn_3_shrubland_level',
+    grassland: 'iucn_4_grassland_level',
+    wetlands: 'iucn_5_wetland_level'
+  };
+
+  // Loop through each class and export
+  Object.keys(classes).forEach(function(key) {
+    createOutput(classes[key], output_path, filenames[key] + level);
+  });
+}
+
+exportClassLayers(level, export_classes);
+createOutput(comp, output_path, 'AIV_Host_Habitats_level' + level + '_' + year);
+
+
